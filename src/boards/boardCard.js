@@ -11,6 +11,9 @@ const BoardCard = (props) => {
     return ( 
         <Fragment>
             <div className="boardCard"> 
+                <div style={{ position: 'relative', left: "120px", top: "15px" }}>
+                    <button className="boardCardRemoveButton"/>
+                </div>
                 <div className="boardCardTitle"> 
                     { props.title }
                 </div>

@@ -16,3 +16,11 @@
     padding: 25%;
     font-weight: bold;
 }
+
+.boardCardRemoveButton {
+    border: none;
+    background-color: #FF6961;
+    border-radius: 50%;
+    height: 20px; 
+    width: 20px;
+}

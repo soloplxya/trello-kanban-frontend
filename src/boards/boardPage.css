@@ -1,12 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
+.addNewBoardButton {
+    border-radius: 10px;
+    height: 40px;
+    border: none;
+    padding-left: 10px; 
+    padding-right: 10px;
+    color: #FFF;
+    background-color: #AC6D6D;
+}
+
 .boardPage {
     background: #FFD3B6;
     height: 100% vh
 }
 
 .boardTitle {
-    padding: 25px 25px;
+    padding: 25px;
     text-align: center; 
     font-family: 'Montserrat'; 
     font-size: 22px;
@@ -15,6 +25,7 @@
 }
 
 .boardsList {
+    align-items: center;
     display: flex; 
     flex-direction: row;
     flex-wrap: wrap;
@@ -24,3 +35,6 @@
 .boardsListItem {
     padding: 20px;
 }
+
+
+

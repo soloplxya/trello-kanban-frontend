@@ -11,9 +11,15 @@ const Board = () => {
     return ( 
         <Fragment>
             <div className="boardPage">
-                <div className="boardTitle"> 
-                    Boards
+                <div style={{alignItems: "center"}}>  
+                    <div className="boardTitle"> 
+                        Boards
+                    </div>
+                    <button className="addNewBoardButton">
+                        Add New Board
+                    </button> 
                 </div>
+                
                 <div className="boardsList">
                     <BoardCard title="String"/> 
                     <BoardCard title="String"/> 
