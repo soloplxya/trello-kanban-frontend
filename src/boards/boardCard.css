@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+.boardCard {
+    background: #FFF;
+    height: 200px; 
+    width: 300px; 
+    border-radius: 15%;
+    opacity: 40%;
+    margin: 40px;
+}
+
+.boardCardTitle {
+    color: #B63434; 
+    font-family: 'Montserrat'; 
+    font-size: 22px;
+    padding: 25%;
+    font-weight: bold;
+}

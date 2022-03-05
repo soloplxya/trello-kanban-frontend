@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+.boardPage {
+    background: #FFD3B6;
+    height: 100% vh
+}
+
+.boardTitle {
+    padding: 25px 25px;
+    text-align: center; 
+    font-family: 'Montserrat'; 
+    font-size: 22px;
+    font-weight: bold;
+    color: #AC6D6D;
+}
+
+.boardsList {
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+}
+
+.boardsListItem {
+    padding: 20px;
+}
