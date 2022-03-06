@@ -1,12 +1,17 @@
 import './column.css';
+import DraggableTask from './draggableTask';
+import { Fragment } from 'react';
 
 const Column = (props) => {
     return (
-        <div className="column">
-            <div className="columnTitle">
-                { props.columnTitle }
-            </div> 
-        </div>
+        <Fragment>
+            <div className="column">
+                <div className="columnTitle">
+                    { props.columnTitle }
+                </div> 
+                <DraggableTask description="test" />
+            </div>
+        </Fragment> 
     );
 }
 
