@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+.modalTitle {
+    padding: 25px;
+    text-align: center; 
+    font-family: 'Montserrat'; 
+    font-size: 22px;
+    font-weight: bold;
+    color: #AC6D6D;
+}
+
+.modalBoardButton {
+    border-radius: 10px;
+    height: 40px;
+    border: none;
+    margin-top: 20px;
+    padding-left: 10px; 
+    padding-right: 10px;
+    color: #FFF;
+    background-color: #AC6D6D;
+}

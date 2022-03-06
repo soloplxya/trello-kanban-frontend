@@ -1,3 +1,4 @@
+import { chainPropTypes } from '@mui/utils';
 import React, { Fragment } from 'react'; 
 import './boardCard.css';
 
@@ -7,15 +8,27 @@ import './boardCard.css';
  * @returns card representing an existing board. 
  */
 
-const BoardCard = (props) => {
+const BoardCard = ({id, title, boards, setBoards}) => {
+
+    function removeBoard() {
+        console.log("here")
+        boards.pop(id)
+        setBoards(boards.filter(board => board.id !== id))
+        //props.setBoards(props.boards.pop(props.id))
+        localStorage.setItem('boards', JSON.stringify(boards))
+    }
+
     return ( 
         <Fragment>
             <div className="boardCard"> 
                 <div style={{ position: 'relative', left: "120px", top: "15px" }}>
-                    <button className="boardCardRemoveButton"/>
+                    <button 
+                        onClick={removeBoard}
+                        className="boardCardRemoveButton"
+                    />
                 </div>
                 <div className="boardCardTitle"> 
-                    { props.title }
+                    { title }
                 </div>
             </div>
         </Fragment> 

@@ -1,4 +1,5 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import AddBoardModal from "./AddBoardModal";
 import BoardCard from './boardCard'
 import './boardPage.css'
 
@@ -8,6 +9,46 @@ import './boardPage.css'
  */
 
 const Board = () => {
+
+    const [boards, setBoards] = useState([]); 
+    const [isOpen, setIsOpen] = useState(false);
+
+    function fillBoard() {
+        if (localStorage.getItem('boards')) {
+            setBoards(JSON.parse(localStorage.getItem('boards')));
+        } else {
+            const boardsList = [{
+                id: 0,
+                title: "CS3243",  
+                columns: {
+                    todo: [{
+                        id: 0, 
+                        description: "test"
+                    }], 
+                    inProgress: [{
+                        id: 0, 
+                        description: "test"
+                    }], 
+                    done: [{
+                        id: 0, 
+                        description: "test"
+                    }]
+                }
+            }];
+
+            setBoards(boardsList);
+        }
+    }
+
+    // function to toggle the 
+    function toggleModal() {
+        setIsOpen(true)
+    }
+
+    useEffect(() => {
+        fillBoard();
+    }, []); 
+
     return ( 
         <Fragment>
             <div className="boardPage">
@@ -15,18 +56,25 @@ const Board = () => {
                     <div className="boardTitle"> 
                         Boards
                     </div>
-                    <button className="addNewBoardButton">
+                    <button 
+                        onClick={toggleModal}
+                        className="addNewBoardButton"
+                    >
                         Add New Board
                     </button> 
                 </div>
-                
                 <div className="boardsList">
-                    <BoardCard title="String"/> 
-                    <BoardCard title="String"/> 
-                    <BoardCard title="String"/> 
-                    <BoardCard title="String"/> 
+                    {boards.map((x,i) => {
+                        return <BoardCard key={i} id={i} title={x.title} boards={boards} setBoards={setBoards}></BoardCard>
+                    })}
                 </div>
             </div> 
+            <AddBoardModal 
+                setIsOpen={setIsOpen} 
+                isOpen={isOpen} 
+                setBoards={setBoards}
+                boards={boards}
+            /> 
         </Fragment>
     )
 }
