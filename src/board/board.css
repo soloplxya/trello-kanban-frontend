@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+.addNewBoardButton {
+    border-radius: 10px;
+    height: 40px;
+    border: none;
+    padding-left: 10px; 
+    padding-right: 10px;
+    color: #FFF;
+    background-color: #AC6D6D;
+}
+
+.boardPage {
+    background: #FFD3B6;
+    height: 2000px;
+}
+
+.boardTitle {
+    padding: 15px;
+    text-align: center; 
+    font-family: 'Montserrat'; 
+    font-size: 22px;
+    font-weight: bold;
+    color: #AC6D6D;
+}
+
+.columnsList {
+    align-items: center;
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+}
+
+.boardsListItem {
+    padding: 20px;
+}
+
+
+

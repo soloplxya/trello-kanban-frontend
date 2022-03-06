@@ -8,7 +8,7 @@ import './boardPage.css'
  * @returns boards
  */
 
-const Board = () => {
+const Boards = () => {
 
     const [boards, setBoards] = useState([]); 
     const [isOpen, setIsOpen] = useState(false);
@@ -79,4 +79,4 @@ const Board = () => {
     )
 }
 
-export default Board;
+export default Boards;

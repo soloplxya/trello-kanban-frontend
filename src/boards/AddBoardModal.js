@@ -45,7 +45,6 @@ const AddBoardModal = (props) => {
         newBoard.id = newBoard.id + 1
 
         props.boards.push(newBoard);
-        //console.log(boards);
         localStorage.setItem('boards', JSON.stringify(props.boards))
         toggleModal();
     }

@@ -1,4 +1,4 @@
-import { chainPropTypes } from '@mui/utils';
+import { Link } from 'react-router-dom';
 import React, { Fragment } from 'react'; 
 import './boardCard.css';
 
@@ -9,6 +9,7 @@ import './boardCard.css';
  */
 
 const BoardCard = ({id, title, boards, setBoards}) => {
+    const url = "/" + id;
 
     function removeBoard() {
         console.log("here")
@@ -27,9 +28,15 @@ const BoardCard = ({id, title, boards, setBoards}) => {
                         className="boardCardRemoveButton"
                     />
                 </div>
+                <Link
+                    to={{ pathname: url }}
+                    state={{ title: title }}
+                    style={{ textDecoration: 'none' }}
+                > 
                 <div className="boardCardTitle"> 
                     { title }
                 </div>
+                </Link>
             </div>
         </Fragment> 
     )

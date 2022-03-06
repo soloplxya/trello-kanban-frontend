@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+.column {
+    background: #FFF;
+    height: 400px; 
+    width: 300px; 
+    border-radius: 15%;
+    opacity: 40%;
+    margin: 40px;
+}
+
+.columnTitle {
+    color: #B63434; 
+    font-family: 'Montserrat'; 
+    font-size: 15px;
+    padding: 5%;
+    font-weight: bold;
+}

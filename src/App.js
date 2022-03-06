@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Board from './boards/boardPage'
+import Boards from './boards/boardPage'
+import Board from './board/board'
 
 function App() {
   return (
@@ -10,7 +11,11 @@ function App() {
           <Route
             exact
             path={"/"}
-            element={<Board />}
+            element={<Boards />}
+          />
+          <Route 
+            path=":id" 
+            element={<Board />} 
           />
         </Routes>
       </BrowserRouter>
