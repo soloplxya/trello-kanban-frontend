@@ -9,7 +9,15 @@ const Column = (props) => {
         console.log(props.tasks)
         return (
             props.tasks.map((x,i) => {
-                return <DraggableTask key={i} taskId={x.id} description={x.description} onDragStart={props.onDragStart}></DraggableTask>
+                return <DraggableTask 
+                            key={i} 
+                            taskId={x.id} 
+                            tasks={props.tasks}
+                            setTasks={props.setTasks}
+                            description={x.description} 
+                            columnTitle={props.columnTitle} 
+                            onDragStart={props.onDragStart}>
+                        </DraggableTask>
             })
         )
     }

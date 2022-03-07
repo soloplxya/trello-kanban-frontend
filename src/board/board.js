@@ -1,5 +1,5 @@
 import { useLocation, useParams } from "react-router-dom";
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, useRef } from "react";
 import AddTaskModal from './AddTaskModal';
 import Column from './column';
 import './board.css';
@@ -13,6 +13,7 @@ const Board = () => {
     const [title, setTitle] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation(); 
+    const renameArea = useRef('');
 
     function retrieveBoard() {
         const boards = JSON.parse(localStorage.getItem("boards"));
@@ -93,6 +94,20 @@ const Board = () => {
         setIsOpen(true)
     }
 
+    function handleRename(e) {
+        const boards = JSON.parse(localStorage.getItem("boards"));
+        const board = boards[parseInt(id)];
+
+        if (e.keyCode === 13) {
+            const value = renameArea.current.innerHTML;
+            e.preventDefault();
+            setTitle(value); 
+            board.title = value; 
+            localStorage.setItem("boards", JSON.stringify(boards))
+        }
+        
+    }
+
     useEffect(() => {
         retrieveBoard()
     },[]); 
@@ -101,7 +116,10 @@ const Board = () => {
         <Fragment>
             <div className='boardPage'>
                 <div style={{ alignItems: "center "}}>
-                    <div className='boardTitle'> 
+                    <div className='boardTitle' 
+                         contentEditable="true"
+                         onKeyDown= {e => handleRename(e)}
+                         ref={renameArea}> 
                         { title } 
                     </div> 
                     <button 

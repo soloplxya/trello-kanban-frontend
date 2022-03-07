@@ -11,5 +11,14 @@
     cursor: pointer;
     width: 250px;
   }
+
+  .taskRemoveButton {
+    border: none;
+    background-color: #FFAAA5;
+    border-radius: 50%;
+    height: 12px; 
+    width: 10px;
+}
+
   
   

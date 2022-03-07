@@ -21,18 +21,9 @@ const Boards = () => {
                 id: 0,
                 title: "CS3243",  
                 columns: {
-                    todo: [{
-                        id: 0, 
-                        description: "1"
-                    }], 
-                    inProgress: [{
-                        id: 1, 
-                        description: "2"
-                    }], 
-                    done: [{
-                        id: 2, 
-                        description: "3"
-                    }]
+                    todo: [], 
+                    inProgress: [], 
+                    done: []
                 }
             }];
 
