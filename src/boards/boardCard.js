@@ -12,7 +12,6 @@ const BoardCard = ({id, title, boards, setBoards}) => {
     const url = "/" + id;
 
     function removeBoard() {
-        console.log("here")
         boards.pop(id)
         setBoards(boards.filter(board => board.id !== id))
         //props.setBoards(props.boards.pop(props.id))

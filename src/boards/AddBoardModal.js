@@ -29,17 +29,18 @@ const AddBoardModal = (props) => {
     function addBoard() {
         const newBoard = new Object(); 
         newBoard.title = title; 
-        newBoard.columns = { todo: [{
-            id: 0, 
-            description: "test"
+        newBoard.columns = { 
+            todo: [{
+                id: 0, 
+                description: "1"
             }], 
             inProgress: [{
-                id: 0, 
-                description: "test"
+                id: 1, 
+                description: "2"
             }], 
             done: [{
-                id: 0, 
-                description: "test"
+                id: 2, 
+                description: "3"
             }]
         };
         newBoard.id = newBoard.id + 1

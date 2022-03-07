@@ -23,15 +23,15 @@ const Boards = () => {
                 columns: {
                     todo: [{
                         id: 0, 
-                        description: "test"
+                        description: "1"
                     }], 
                     inProgress: [{
-                        id: 0, 
-                        description: "test"
+                        id: 1, 
+                        description: "2"
                     }], 
                     done: [{
-                        id: 0, 
-                        description: "test"
+                        id: 2, 
+                        description: "3"
                     }]
                 }
             }];
