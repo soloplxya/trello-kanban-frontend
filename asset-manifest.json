@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/trello-kanban-frontend/static/css/main.d770cebb.css",
-    "main.js": "/trello-kanban-frontend/static/js/main.1b80682d.js",
+    "main.js": "/trello-kanban-frontend/static/js/main.03ffd317.js",
     "static/js/787.c00d4a83.chunk.js": "/trello-kanban-frontend/static/js/787.c00d4a83.chunk.js",
     "index.html": "/trello-kanban-frontend/index.html",
     "main.d770cebb.css.map": "/trello-kanban-frontend/static/css/main.d770cebb.css.map",
-    "main.1b80682d.js.map": "/trello-kanban-frontend/static/js/main.1b80682d.js.map",
+    "main.03ffd317.js.map": "/trello-kanban-frontend/static/js/main.03ffd317.js.map",
     "787.c00d4a83.chunk.js.map": "/trello-kanban-frontend/static/js/787.c00d4a83.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d770cebb.css",
-    "static/js/main.1b80682d.js"
+    "static/js/main.03ffd317.js"
   ]
 }
