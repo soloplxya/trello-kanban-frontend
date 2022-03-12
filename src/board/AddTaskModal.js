@@ -39,10 +39,11 @@ const AddTaskModal = ({setIsOpen, isOpen, setTodos, todos, setInProgress, inProg
         }
 
         if (list == "Todo") {
+            console.log("here")
             todos.push(newTask);
             console.log(todos)
             setTodos(todos);
-            board.columns.todos = todos;
+            board.columns.todo = todos;
         } else if (list == "InProgress") {
             inProgress.push(newTask);
             setInProgress(inProgress);

@@ -16,10 +16,11 @@
 }
 
 .boardHeader {
+    width: 100vw;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .boardTitle {
@@ -47,5 +48,13 @@
     outline: 0px solid transparent;
 }
 
+
+.settingsButton {
+    margin-right: 15px;
+}
+
+.backButton {
+    margin-left: 15px;
+}
 
 

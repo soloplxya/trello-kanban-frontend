@@ -1,11 +1,16 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { Fragment, useState, useEffect, useRef } from "react";
 import AddTaskModal from './AddTaskModal';
+import SettingsModal from './SettingsModal';
 import Column from './column';
-import { TiBackspaceOutline } from 'react-icons/ti'
+import { TiBackspaceOutline } from 'react-icons/ti';
+import { FiSettings } from 'react-icons/fi';
 import './board.css';
+import { DragDropContext } from "react-beautiful-dnd";
+
 
 const Board = () => {
+    let navigate = useNavigate();
     const { id } = useParams();
     const [todos, setTodos] = useState([]);
     const [inProgress, setInProgress] = useState([]);
@@ -13,6 +18,8 @@ const Board = () => {
     const [board, setBoard] = useState({});
     const [title, setTitle] = useState("");
     const [isOpen, setIsOpen] = useState(false);
+    const [tasksNo, setTasksNo] = useState(5);
+    const [settingsOpen, setSettingsOpen] = useState(false); 
     const location = useLocation(); 
     const renameArea = useRef('');
 
@@ -32,69 +39,73 @@ const Board = () => {
         setBoard(board);
     }
 
-    // Start Drag
-    const onDragStart = (e, fromList) => {
-        console.log(`what a drag!`)
-        const dragInfo = {
-          taskId: e.currentTarget.id,
-          description: e.target.getAttribute("description"),
-          fromList: fromList
-        }
 
-        localStorage.setItem('dragInfo', JSON.stringify(dragInfo));
-    }
-
-    // Do nothing when the element is being dragged over
-    const onDragOver = (e) => {
-        e.preventDefault();
-    }
-
-    const onDrop = (e, listNum) => {
-        //get the dropped task card, the localStorage, 
-        const droppedTask = JSON.parse(localStorage.getItem('dragInfo'));      
+    const onDragEnd = (result) => {
         const boards = JSON.parse(localStorage.getItem('boards'));
         const board = boards[parseInt(id)];
-        var card; 
+        if (!result.destination) {
+            return; 
+        }
 
-        // Remove the task from the origin list
-        if (droppedTask.fromList == 0) {
-            var card = todos.find(card => parseInt(card.id) == parseInt(droppedTask.taskId))
-            const filteredTodos = todos.filter(card => parseInt(card.id) !== parseInt(droppedTask.taskId))
+
+        var card; 
+        const sourceList = result.source.droppableId;
+        const destinationList = result.destination.droppableId;
+
+        const draggedTaskId = result.source.draggableId; 
+        const sourceItemIndex = result.source.index;
+
+        // if the list that the task is dragged from is the same as the list the task is dropped in
+        if (sourceList == destinationList) {
+            return;
+        }
+
+        if (sourceList === "Todo") {
+            console.log(todos)
+            var card = todos.find(card => parseInt(card.id) == parseInt(sourceItemIndex));
+            const filteredTodos = todos.filter(card => parseInt(card.id) !== parseInt(sourceItemIndex));
             setTodos(filteredTodos);
             board.columns.todo = filteredTodos;
-        } else if (droppedTask.fromList == 1) {
-            var card = inProgress.find(card => parseInt(card.id) == parseInt(droppedTask.taskId))
-            const filteredInProgress = inProgress.filter(card => parseInt(card.id) !== parseInt(droppedTask.taskId));
+        } else if (sourceList === "In Progress" ) {
+            console.log(inProgress)
+            var card = inProgress.find(card => parseInt(card.id) == parseInt(sourceItemIndex));
+            const filteredInProgress = inProgress.filter(card => parseInt(card.id) !== parseInt(sourceItemIndex));
             setInProgress(filteredInProgress);
             board.columns.inProgress = filteredInProgress;
-        } else if (droppedTask.fromList == 2) {
-            var card = done.find(card => parseInt(card.id) == parseInt(droppedTask.taskId))
-            const filteredDone = done.filter(card => parseInt(card.id) !== parseInt(droppedTask.taskId))
+        } else if (sourceList === "Done") {
+            console.log(done)
+            var card = done.find(card => parseInt(card.id) == parseInt(sourceItemIndex));
+            const filteredDone = done.filter(card => parseInt(card.id) !== parseInt(sourceItemIndex));
             setDone(filteredDone); 
             board.columns.done = filteredDone; 
         }
-        
-        // put a new card in the list where it was dropped
-        if (listNum == 0) {
+
+        if (destinationList === "Todo") {
             todos.push(card);
             setTodos(todos);
             board.columns.todo = todos;
-        } else if (listNum == 1) {
+        } else if (destinationList === "In Progress") {
             inProgress.push(card);
             setInProgress(inProgress);
             board.columns.inProgress = inProgress;
-        } else if (listNum == 2) {
+        } else if (destinationList === "Done") {
             done.push(card);
             setDone(done);
             board.columns.done = done;
         }
-        
+
         localStorage.setItem('boards', JSON.stringify(boards));
     }
 
-     // function to toggle the modal
+     // function to toggle the add task modal
      function toggleModal() {
-        setIsOpen(true)
+        setIsOpen(true);
+    }
+
+    // function to toggle the settings modal
+    function toggleSettingsModal() {
+        console.log("here")
+        setSettingsOpen(true);
     }
 
     function handleRename(e) {
@@ -116,22 +127,28 @@ const Board = () => {
     },[]); 
 
     return (
-        <Fragment>
+        <DragDropContext onDragEnd={onDragEnd} onDragStart={console.log("Test")}>
             <div className='boardPage'>
                 <div className='boardHeader'>
-                        {
-                            // TODO: back button functionality
-                            /*
-                            <div className='backButton'>
-                                <TiBackspaceOutline color="#AC6D6D" size="40"/> 
-                            </div> 
-                            */
-                        }
+                    <div className='backButton'>
+                        <TiBackspaceOutline 
+                            color="#AC6D6D" 
+                            size="30"
+                            onClick={() => {navigate("/")}}
+                        /> 
+                    </div> 
                     <div className='boardTitle' 
                             contentEditable="true"
                             onKeyDown= {e => handleRename(e)}
                             ref={renameArea}> 
                         { title } 
+                    </div> 
+                    <div className='settingsButton'>
+                        <FiSettings 
+                            color="#AC6D6D" 
+                            size="30"
+                            onClick={toggleSettingsModal}
+                        /> 
                     </div> 
                 </div>
                 <div style={{ alignItems: "center "}}>
@@ -147,25 +164,16 @@ const Board = () => {
                         columnTitle="Todo" 
                         tasks={todos}
                         setTasks={setTodos}
-                        onDragOver={onDragOver}
-                        onDragStart={(e) => onDragStart(e, 0)}
-                        onDrop={(e) => onDrop(e, 0)}
                     /> 
                     <Column 
                         columnTitle="In Progress" 
                         tasks={inProgress}
                         setTasks={setInProgress}
-                        onDragOver={onDragOver}
-                        onDragStart={(e) => onDragStart(e, 1)}
-                        onDrop={(e) => onDrop(e, 1)}
                     />
                     <Column 
                         columnTitle="Done" 
                         tasks={done}
                         setTasks={setDone}
-                        onDragOver={onDragOver}
-                        onDragStart={(e) => onDragStart(e, 2)}
-                        onDrop={(e) => onDrop(e, 2)}
                     /> 
                 </div>
                 <AddTaskModal 
@@ -178,8 +186,14 @@ const Board = () => {
                     done={done}
                     setDone={setDone}
                 /> 
+                <SettingsModal
+                    settingsOpen={settingsOpen}
+                    setSettingsOpen={setSettingsOpen}
+                    tasksNo={tasksNo}
+                    setTasksNo={setTasksNo}
+                />
             </div>
-        </Fragment>
+        </DragDropContext>
     );
 }
 
