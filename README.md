@@ -1,46 +1,30 @@
-# Getting Started with Create React App
+# Trello Kanban Front-End 
+## Setting up the program locally 
+1. Clone the project to your computer. 
+2. Run `npm install` or `npm i` to install the relevant module dependecies required for the program to run. 
+3. To run the program on development, use the command `npm run dev`. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Testing locally 
+1. Head to `http://localhost:3000/trello-kanban-frontend/` to view the webpage in development. 
 
-## Available Scripts
+## Features 
+At the index page, the user should be able to: 
+1. Add a new board 
+2. Click on a new board 
 
-In the project directory, you can run:
+At the board page, the user should be able to: 
+1. Click on the title of the board and edit it.
+2. Add draggable items to either the todo, in progress or done column. 
+3. Drag and drop the draggable items across the 3 columns. 
+4. Change the maximum number of items as long as it is within the width limit of the column. 
+5. Delete draggable items by clicking on the delete icon on each draggable task. 
 
-### `npm start`
+## Viewing it in production 
+1. Head to `https://soloplxya.github.io/trello-kanban-frontend/` to view the webpage in production. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Trello Kanban Front-End 
-
+ 
+## Prototype
 A figma prototype of the end product is available for viewing [here](https://www.figma.com/file/iDcmBbOdBj7F1deGH7dKMd/Trello-Kanban-Prototype?node-id=3%3A79). 
 Alternatively, you can refer to a screenshot of the prototype below: 
 
