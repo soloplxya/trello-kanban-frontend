@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom'; 
 import React from 'react';
+import { Draggable } from "react-beautiful-dnd";
 import './draggableTask.css';
 
-const DraggableTask = ({tasks, setTasks, taskId, columnTitle, description, onDragStart}) => {
+const DraggableTask = ({tasks, setTasks, taskId, columnTitle, description, onDragStart, index}) => {
 
   const { id } = useParams();
 
@@ -10,6 +11,7 @@ const DraggableTask = ({tasks, setTasks, taskId, columnTitle, description, onDra
     const boards = JSON.parse(localStorage.getItem('boards'));
     const board = boards[parseInt(id)];
     const filteredTasks = tasks.filter(task => task.id !== taskId)
+    const strTaskId = taskId.toString();
     setTasks(filteredTasks)
     
     if (columnTitle === "Todo") {
@@ -24,17 +26,29 @@ const DraggableTask = ({tasks, setTasks, taskId, columnTitle, description, onDra
   }
 
   return (
-    <div className="task-card" draggable="true" id={taskId} description={description} onDragStart={onDragStart}>
-       <div style={{ position: 'relative', left: "115px", bottom: "5px"}}>
-            <button 
-                onClick={removeTask}
-                className="taskRemoveButton"
-            />
+    <Draggable draggableId={taskId.toString()} index={index}>
+      {(provided, snapshot) => (  
+        <div 
+            className="task-card" 
+            id={taskId} 
+            description={description} 
+            ref={provided.innerRef}  
+            {...provided.draggableProps}  
+            {...provided.dragHandleProps} 
+        >
+          <div className="taskRemoveButtonDiv">
+                <button 
+                    onClick={removeTask}
+                    className="taskRemoveButton"
+                />
+            </div>
+            <div style={{ position: 'relative', bottom: "12px" }}>
+              {description}
+            </div>
         </div>
-        <div style={{ position: 'relative', bottom: "12px" }}>
-          {description}
-        </div>
-    </div>
+      )
+    }
+    </Draggable>
   ) 
 };
 
