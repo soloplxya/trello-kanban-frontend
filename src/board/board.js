@@ -1,12 +1,15 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { Fragment, useState, useEffect, useRef } from "react";
 import AddTaskModal from './AddTaskModal';
 import Column from './column';
-import { TiBackspaceOutline } from 'react-icons/ti'
+import { TiBackspaceOutline } from 'react-icons/ti';
+import { FiSettings } from 'react-icons/fi';
 import './board.css';
 import { DragDropContext } from "react-beautiful-dnd";
 
+
 const Board = () => {
+    let navigate = useNavigate();
     const { id } = useParams();
     const [todos, setTodos] = useState([]);
     const [inProgress, setInProgress] = useState([]);
@@ -45,31 +48,36 @@ const Board = () => {
         
         var card; 
         const sourceList = result.source.droppableId;
-        const draggedTaskId = result.source.draggableId; 
+        const destinationList = result.destination.droppableId;
 
+        const draggedTaskId = result.source.draggableId; 
         const sourceItemIndex = result.source.index;
+
+        // if the list that the task is dragged from is the same as the list the task is dropped in
+        if (sourceList == destinationList) {
+            return;
+        }
 
         if (sourceList === "Todo") {
             console.log(todos)
-            var card = todos.find(card => parseInt(card.id) == parseInt(sourceItemIndex))
-            const filteredTodos = todos.filter(card => parseInt(card.id) !== parseInt(sourceItemIndex))
+            var card = todos.find(card => parseInt(card.id) == parseInt(sourceItemIndex));
+            const filteredTodos = todos.filter(card => parseInt(card.id) !== parseInt(sourceItemIndex));
             setTodos(filteredTodos);
             board.columns.todo = filteredTodos;
         } else if (sourceList === "In Progress" ) {
             console.log(inProgress)
-            var card = inProgress.find(card => parseInt(card.id) == parseInt(sourceItemIndex))
+            var card = inProgress.find(card => parseInt(card.id) == parseInt(sourceItemIndex));
             const filteredInProgress = inProgress.filter(card => parseInt(card.id) !== parseInt(sourceItemIndex));
             setInProgress(filteredInProgress);
             board.columns.inProgress = filteredInProgress;
         } else if (sourceList === "Done") {
             console.log(done)
-            var card = done.find(card => parseInt(card.id) == parseInt(sourceItemIndex))
-            const filteredDone = done.filter(card => parseInt(card.id) !== parseInt(sourceItemIndex))
+            var card = done.find(card => parseInt(card.id) == parseInt(sourceItemIndex));
+            const filteredDone = done.filter(card => parseInt(card.id) !== parseInt(sourceItemIndex));
             setDone(filteredDone); 
             board.columns.done = filteredDone; 
         }
 
-        const destinationList = result.destination.droppableId;
         if (destinationList === "Todo") {
             todos.push(card);
             setTodos(todos);
@@ -89,7 +97,7 @@ const Board = () => {
 
      // function to toggle the modal
      function toggleModal() {
-        setIsOpen(true)
+        setIsOpen(true);
     }
 
     function handleRename(e) {
@@ -114,19 +122,21 @@ const Board = () => {
         <DragDropContext onDragEnd={onDragEnd} onDragStart={console.log("Test")}>
             <div className='boardPage'>
                 <div className='boardHeader'>
-                        {
-                            // TODO: back button functionality
-                            /*
-                            <div className='backButton'>
-                                <TiBackspaceOutline color="#AC6D6D" size="40"/> 
-                            </div> 
-                            */
-                        }
+                    <div className='backButton'>
+                        <TiBackspaceOutline 
+                            color="#AC6D6D" 
+                            size="30"
+                            onClick={() => {navigate("/")}}
+                        /> 
+                    </div> 
                     <div className='boardTitle' 
                             contentEditable="true"
                             onKeyDown= {e => handleRename(e)}
                             ref={renameArea}> 
                         { title } 
+                    </div> 
+                    <div className='settingsButton'>
+                        <FiSettings color="#AC6D6D" size="30"/> 
                     </div> 
                 </div>
                 <div style={{ alignItems: "center "}}>
