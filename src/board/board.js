@@ -1,6 +1,7 @@
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { Fragment, useState, useEffect, useRef } from "react";
 import AddTaskModal from './AddTaskModal';
+import SettingsModal from './SettingsModal';
 import Column from './column';
 import { TiBackspaceOutline } from 'react-icons/ti';
 import { FiSettings } from 'react-icons/fi';
@@ -17,6 +18,8 @@ const Board = () => {
     const [board, setBoard] = useState({});
     const [title, setTitle] = useState("");
     const [isOpen, setIsOpen] = useState(false);
+    const [tasksNo, setTasksNo] = useState(5);
+    const [settingsOpen, setSettingsOpen] = useState(false); 
     const location = useLocation(); 
     const renameArea = useRef('');
 
@@ -44,8 +47,7 @@ const Board = () => {
             return; 
         }
 
-        console.log("here")
-        
+
         var card; 
         const sourceList = result.source.droppableId;
         const destinationList = result.destination.droppableId;
@@ -95,9 +97,15 @@ const Board = () => {
         localStorage.setItem('boards', JSON.stringify(boards));
     }
 
-     // function to toggle the modal
+     // function to toggle the add task modal
      function toggleModal() {
         setIsOpen(true);
+    }
+
+    // function to toggle the settings modal
+    function toggleSettingsModal() {
+        console.log("here")
+        setSettingsOpen(true);
     }
 
     function handleRename(e) {
@@ -136,7 +144,11 @@ const Board = () => {
                         { title } 
                     </div> 
                     <div className='settingsButton'>
-                        <FiSettings color="#AC6D6D" size="30"/> 
+                        <FiSettings 
+                            color="#AC6D6D" 
+                            size="30"
+                            onClick={toggleSettingsModal}
+                        /> 
                     </div> 
                 </div>
                 <div style={{ alignItems: "center "}}>
@@ -174,6 +186,12 @@ const Board = () => {
                     done={done}
                     setDone={setDone}
                 /> 
+                <SettingsModal
+                    settingsOpen={settingsOpen}
+                    setSettingsOpen={setSettingsOpen}
+                    tasksNo={tasksNo}
+                    setTasksNo={setTasksNo}
+                />
             </div>
         </DragDropContext>
     );
