@@ -2,6 +2,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { Fragment, useState, useEffect, useRef } from "react";
 import AddTaskModal from './AddTaskModal';
 import Column from './column';
+import { TiBackspaceOutline } from 'react-icons/ti'
 import './board.css';
 
 const Board = () => {
@@ -58,20 +59,22 @@ const Board = () => {
         // Remove the task from the origin list
         if (droppedTask.fromList == 0) {
             var card = todos.find(card => parseInt(card.id) == parseInt(droppedTask.taskId))
-            setTodos(todos.filter(card => parseInt(card.id) !== parseInt(droppedTask.taskId)));
-            board.columns.todo = todos;
+            const filteredTodos = todos.filter(card => parseInt(card.id) !== parseInt(droppedTask.taskId))
+            setTodos(filteredTodos);
+            board.columns.todo = filteredTodos;
         } else if (droppedTask.fromList == 1) {
             var card = inProgress.find(card => parseInt(card.id) == parseInt(droppedTask.taskId))
-            setInProgress(inProgress.filter(card => parseInt(card.id) !== parseInt(droppedTask.taskId)));
-            board.columns.inProgress = inProgress;
+            const filteredInProgress = inProgress.filter(card => parseInt(card.id) !== parseInt(droppedTask.taskId));
+            setInProgress(filteredInProgress);
+            board.columns.inProgress = filteredInProgress;
         } else if (droppedTask.fromList == 2) {
             var card = done.find(card => parseInt(card.id) == parseInt(droppedTask.taskId))
-            setDone(done.filter(card => parseInt(card.id) !== parseInt(droppedTask.taskId))); 
-            board.columns.done = done; 
+            const filteredDone = done.filter(card => parseInt(card.id) !== parseInt(droppedTask.taskId))
+            setDone(filteredDone); 
+            board.columns.done = filteredDone; 
         }
         
         // put a new card in the list where it was dropped
-        
         if (listNum == 0) {
             todos.push(card);
             setTodos(todos);
@@ -115,13 +118,23 @@ const Board = () => {
     return (
         <Fragment>
             <div className='boardPage'>
-                <div style={{ alignItems: "center "}}>
+                <div className='boardHeader'>
+                        {
+                            // TODO: back button functionality
+                            /*
+                            <div className='backButton'>
+                                <TiBackspaceOutline color="#AC6D6D" size="40"/> 
+                            </div> 
+                            */
+                        }
                     <div className='boardTitle' 
-                         contentEditable="true"
-                         onKeyDown= {e => handleRename(e)}
-                         ref={renameArea}> 
+                            contentEditable="true"
+                            onKeyDown= {e => handleRename(e)}
+                            ref={renameArea}> 
                         { title } 
                     </div> 
+                </div>
+                <div style={{ alignItems: "center "}}>
                     <button 
                         onClick={toggleModal}
                         className="addNewTaskButton"

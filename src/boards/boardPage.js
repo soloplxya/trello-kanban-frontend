@@ -28,6 +28,7 @@ const Boards = () => {
             }];
 
             setBoards(boardsList);
+            localStorage.setItem('boards', JSON.stringify(boardsList));
         }
     }
 

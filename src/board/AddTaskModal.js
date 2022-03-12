@@ -8,7 +8,7 @@ import './AddTaskModal.css'
 
 const AddTaskModal = ({setIsOpen, isOpen, setTodos, todos, setInProgress, inProgress, setDone, done}) => {
     const { id } = useParams();
-    const [list, setList] = useState("");
+    const [list, setList] = useState("Todo");
     const [description, setDescription] = useState("");
     const customStyles = {
         content: {
