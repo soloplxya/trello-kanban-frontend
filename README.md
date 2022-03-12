@@ -2,7 +2,7 @@
 ## Setting up the program locally 
 1. Clone the project to your computer. 
 2. Run `npm install` or `npm i` to install the relevant module dependecies required for the program to run. 
-3. To run the program on development, use the command `npm run dev`. 
+3. To run the program on development, use the command `npm run start`. 
 
 ## Testing locally 
 1. Head to `http://localhost:3000/trello-kanban-frontend/` to view the webpage in development. 
