@@ -6,7 +6,7 @@ import Board from './board/board'
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename="/trello-kanban-frontend">
         <Routes>
           <Route
             exact
