@@ -12,15 +12,15 @@ const BoardCard = ({id, description, title, boards, setBoards}) => {
     const url = "/" + id;
 
     function removeBoard() {
-        boards.pop(id)
-        setBoards(boards.filter(board => board.id !== id))
-        localStorage.setItem('boards', JSON.stringify(boards))
+        boards.pop(id);
+        setBoards(boards.filter(board => board.id !== id));
+        localStorage.setItem('boards', JSON.stringify(boards));
     }
 
     return ( 
         <Fragment>
             <div className="boardCard"> 
-                <div style={{ position: 'relative', left: "120px", top: "15px" }}>
+                <div className="boardCardRemoveButtonDiv">
                     <button 
                         onClick={removeBoard}
                         className="boardCardRemoveButton"
@@ -38,7 +38,6 @@ const BoardCard = ({id, description, title, boards, setBoards}) => {
                     </div>
                 </div>
                 </Link>
-                
             </div>
         </Fragment> 
     )

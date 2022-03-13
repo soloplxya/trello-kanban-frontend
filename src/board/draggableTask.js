@@ -3,14 +3,14 @@ import React from 'react';
 import { Draggable } from "react-beautiful-dnd";
 import './draggableTask.css';
 
-const DraggableTask = ({tasks, setTasks, taskId, columnTitle, description, onDragStart, index}) => {
+const DraggableTask = ({tasks, setTasks, taskId, columnTitle, description, index}) => {
 
   const { id } = useParams();
 
   function removeTask() {
     const boards = JSON.parse(localStorage.getItem('boards'));
     const board = boards[parseInt(id)];
-    const filteredTasks = tasks.filter(task => task.id !== taskId)
+    const filteredTasks = tasks.filter(task => task.id !== taskId);
     const strTaskId = taskId.toString();
     setTasks(filteredTasks)
     
@@ -37,14 +37,14 @@ const DraggableTask = ({tasks, setTasks, taskId, columnTitle, description, onDra
             {...provided.dragHandleProps} 
         >
           <div className="taskRemoveButtonDiv">
-                <button 
-                    onClick={removeTask}
-                    className="taskRemoveButton"
-                />
-            </div>
-            <div style={{ position: 'relative', bottom: "12px" }}>
-              {description}
-            </div>
+            <button 
+                onClick={removeTask}
+                className="taskRemoveButton"
+            />
+          </div>
+          <div style={{ position: 'relative', bottom: "12px" }}>
+            {description}
+          </div>
         </div>
       )
     }

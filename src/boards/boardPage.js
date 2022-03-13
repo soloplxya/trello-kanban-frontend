@@ -13,6 +13,7 @@ const Boards = () => {
     const [boards, setBoards] = useState([]); 
     const [isOpen, setIsOpen] = useState(false);
 
+    // function that displays list of boards in local storage if there exists any, otherwise displays default boards list
     function fillBoard() {
         if (localStorage.getItem('boards')) {
             setBoards(JSON.parse(localStorage.getItem('boards')));
@@ -33,7 +34,7 @@ const Boards = () => {
         }
     }
 
-    // function to toggle the 
+    // function to toggle the add board modal
     function toggleModal() {
         setIsOpen(true)
     }

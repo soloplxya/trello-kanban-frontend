@@ -20,9 +20,16 @@
 .boardCardRemoveButton {
     border: none;
     background-color: #FFAAAA;
+    left: 45%;
     border-radius: 50%;
     height: 20px; 
     width: 20px;
+}
+
+.boardCardRemoveButtonDiv {
+    position: relative;
+    top: 5%; 
+    left: 40%;
 }
 
 .boardCardDescription {

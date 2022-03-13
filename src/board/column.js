@@ -1,11 +1,8 @@
 import './column.css';
 import DraggableTask from './draggableTask';
-import { Fragment, useState, useEffect } from 'react';
 import { Droppable } from "react-beautiful-dnd";
 
 const Column = (props) => {
-    let items = [];
-    
     const displayedItems = () => {
         console.log(props.tasks)
         return (

@@ -3,7 +3,7 @@ import { Fragment, useState, useEffect, useRef } from "react";
 import AddTaskModal from './AddTaskModal';
 import SettingsModal from './SettingsModal';
 import Column from './column';
-import { TiBackspaceOutline } from 'react-icons/ti';
+import { MdArrowBack } from 'react-icons/md';
 import { FiSettings } from 'react-icons/fi';
 import './board.css';
 import { DragDropContext } from "react-beautiful-dnd";
@@ -25,8 +25,8 @@ const Board = () => {
     const renameTitle = useRef('');
     const renameDescription = useRef('');
 
+    // function that sets up the board
     function retrieveBoard() {
-        // initialize common maximum
         if (localStorage.getItem('tasksNo')) {
             setTasksNo(localStorage.getItem('tasksNo'));
         } else {
@@ -50,6 +50,7 @@ const Board = () => {
         setBoard(board);
     }
 
+    // function that is initialized when a drag event is completed
     const onDragEnd = (result) => {
         const tasksNo = localStorage.getItem('tasksNo');
         const boards = JSON.parse(localStorage.getItem('boards'));
@@ -63,6 +64,8 @@ const Board = () => {
         const sourceList = result.source.droppableId;
         const destinationList = result.destination.droppableId;
 
+        const destination = getList(destinationList);
+
         const draggedTaskId = result.source.draggableId; 
         const sourceItemIndex = result.source.index;
 
@@ -72,7 +75,7 @@ const Board = () => {
         }
 
         if (sourceList === "Todo") {
-            if (todos.length == tasksNo) {
+            if (destination.length == tasksNo) {
                 alert("Number of tasks has exceeded task limit! You can change this value in settings.");
                 return;
             }
@@ -81,7 +84,7 @@ const Board = () => {
             setTodos(filteredTodos);
             board.columns.todo = filteredTodos;
         } else if (sourceList === "In Progress" ) {
-            if (todos.length == tasksNo) {
+            if (destination.length == tasksNo) {
                 alert("Number of tasks has exceeded task limit! You can change this value in settings.");
                 return;
             }
@@ -90,7 +93,7 @@ const Board = () => {
             setInProgress(filteredInProgress);
             board.columns.inProgress = filteredInProgress;
         } else if (sourceList === "Done") {
-            if (todos.length == tasksNo) {
+            if (destination.length == tasksNo) {
                 alert("Number of tasks has exceeded task limit! You can change this value in settings.");
                 return;
             }
@@ -117,6 +120,19 @@ const Board = () => {
         localStorage.setItem('boards', JSON.stringify(boards));
     }
 
+
+    function getList(list) {
+        switch (list) {
+        case "Todo": 
+            return todos;
+        case "In Progress": 
+            return inProgress; 
+        case "Done": 
+            return done; 
+        default: 
+            break;
+        }
+    }
      // function to toggle the add task modal
      function toggleModal() {
         setIsOpen(true);
@@ -124,10 +140,10 @@ const Board = () => {
 
     // function to toggle the settings modal
     function toggleSettingsModal() {
-        console.log("here")
         setSettingsOpen(true);
     }
 
+    // function that handles the edit of the title/description
     function handleRename(e) {
         const boards = JSON.parse(localStorage.getItem("boards"));
         const board = boards[parseInt(id)];
@@ -156,7 +172,7 @@ const Board = () => {
             <div className='boardPage'>
                 <div className='boardHeader'>
                     <div className='backButton'>
-                        <TiBackspaceOutline 
+                        <MdArrowBack
                             color="#AC6D6D" 
                             size="30"
                             onClick={() => {navigate("/")}}

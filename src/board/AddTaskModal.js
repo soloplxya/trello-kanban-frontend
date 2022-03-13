@@ -78,7 +78,7 @@ const AddTaskModal = ({setIsOpen, isOpen, setTodos, todos, setInProgress, inProg
     }
 
     function handleOptionChange(value) {
-        setList(value)
+        setList(value);
     }
 
     return (

@@ -36,7 +36,7 @@ const AddBoardModal = (props) => {
             inProgress: [], 
             done: [],
         };
-        newBoard.id = newBoard.id + 1
+        newBoard.id = newBoard.id + 1;
 
         props.boards.push(newBoard);
         localStorage.setItem('boards', JSON.stringify(props.boards))
