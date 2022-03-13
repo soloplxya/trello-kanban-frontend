@@ -6,7 +6,8 @@ import './AddBoardModal.css'
 
 
 const AddBoardModal = (props) => {
-    const [title, setTitle] = useState("")
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const customStyles = {
         content: {
           maxHeight: "400vh", 
@@ -29,6 +30,7 @@ const AddBoardModal = (props) => {
     function addBoard() {
         const newBoard = new Object(); 
         newBoard.title = title; 
+        newBoard.description = description
         newBoard.columns = { 
             todo: [{
                 id: 0, 
@@ -77,6 +79,13 @@ const AddBoardModal = (props) => {
                     placeholder="Board Title"
                     style={{padding: "12px 20px", borderRadius: "25px", border: "none"}}
                     onChange={e => setTitle(e.target.value)}
+                /> 
+                <input 
+                    type="text"
+                    text-align="center"
+                    placeholder="Board Description"
+                    style={{padding: "12px 20px", marginTop: "10px", borderRadius: "25px", border: "none"}}
+                    onChange={e => setDescription(e.target.value)}
                 /> 
                 <button 
                     onClick={addBoard}

@@ -5,7 +5,7 @@
     height: 200px; 
     width: 300px; 
     border-radius: 15%;
-    opacity: 40%;
+    background-color: rgba(255,255,255,0.5);
     margin: 40px;
 }
 
@@ -13,14 +13,20 @@
     color: #B63434; 
     font-family: 'Montserrat'; 
     font-size: 22px;
-    padding: 25%;
+    padding: 15%;
     font-weight: bold;
 }
 
 .boardCardRemoveButton {
     border: none;
-    background-color: #FF6961;
+    background-color: #FFAAAA;
     border-radius: 50%;
     height: 20px; 
     width: 20px;
+}
+
+.boardCardDescription {
+    margin-top: 2px;
+    font-size: 15px;
+    color: #ad6f6f;
 }

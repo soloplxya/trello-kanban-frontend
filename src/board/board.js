@@ -17,11 +17,13 @@ const Board = () => {
     const [done, setDone] = useState([]);
     const [board, setBoard] = useState({});
     const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     const [tasksNo, setTasksNo] = useState(10);
     const [settingsOpen, setSettingsOpen] = useState(false); 
     const location = useLocation(); 
-    const renameArea = useRef('');
+    const renameTitle = useRef('');
+    const renameDescription = useRef('');
 
     function retrieveBoard() {
         // initialize common maximum
@@ -44,6 +46,7 @@ const Board = () => {
         setDone(done);
 
         setTitle(board.title); 
+        setDescription(board.description);
         setBoard(board);
     }
 
@@ -130,10 +133,15 @@ const Board = () => {
         const board = boards[parseInt(id)];
 
         if (e.keyCode === 13) {
-            const value = renameArea.current.innerHTML;
+            const newTitle = renameTitle.current.innerHTML;
+            const newDescription = renameDescription.current.innerHTML;
             e.preventDefault();
-            setTitle(value); 
-            board.title = value; 
+            setTitle(newTitle); 
+            setDescription(newDescription);
+        
+
+            board.title = newTitle; 
+            board.description = newDescription;
             localStorage.setItem("boards", JSON.stringify(boards))
         }
         
@@ -157,7 +165,7 @@ const Board = () => {
                     <div className='boardTitle' 
                             contentEditable="true"
                             onKeyDown= {e => handleRename(e)}
-                            ref={renameArea}> 
+                            ref={renameTitle}> 
                         { title } 
                     </div> 
                     <div className='settingsButton'>
@@ -168,7 +176,14 @@ const Board = () => {
                         /> 
                     </div> 
                 </div>
-                <div style={{ alignItems: "center "}}>
+                <div className='boardDescription'
+                     contentEditable="true"
+                     onKeyDown= {e => handleRename(e)}
+                     ref={renameDescription}
+                     > 
+                    { description }
+                </div>
+                <div style={{ alignItems: "center"}}>
                     <button 
                         onClick={toggleModal}
                         className="addNewTaskButton"

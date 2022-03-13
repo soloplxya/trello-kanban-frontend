@@ -20,6 +20,7 @@ const Boards = () => {
             const boardsList = [{
                 id: 0,
                 title: "CS3243",  
+                description: "something", 
                 columns: {
                     todo: [], 
                     inProgress: [], 
@@ -57,7 +58,7 @@ const Boards = () => {
                 </div>
                 <div className="boardsList">
                     {boards.map((x,i) => {
-                        return <BoardCard key={i} id={i} title={x.title} boards={boards} setBoards={setBoards}></BoardCard>
+                        return <BoardCard key={i} id={i} title={x.title} description={x.description} boards={boards} setBoards={setBoards}></BoardCard>
                     })}
                 </div>
             </div> 

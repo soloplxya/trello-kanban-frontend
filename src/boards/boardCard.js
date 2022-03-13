@@ -8,13 +8,12 @@ import './boardCard.css';
  * @returns card representing an existing board. 
  */
 
-const BoardCard = ({id, title, boards, setBoards}) => {
+const BoardCard = ({id, description, title, boards, setBoards}) => {
     const url = "/" + id;
 
     function removeBoard() {
         boards.pop(id)
         setBoards(boards.filter(board => board.id !== id))
-        //props.setBoards(props.boards.pop(props.id))
         localStorage.setItem('boards', JSON.stringify(boards))
     }
 
@@ -34,8 +33,12 @@ const BoardCard = ({id, title, boards, setBoards}) => {
                 > 
                 <div className="boardCardTitle"> 
                     { title }
+                    <div className="boardCardDescription"> 
+                        { description }
+                    </div>
                 </div>
                 </Link>
+                
             </div>
         </Fragment> 
     )

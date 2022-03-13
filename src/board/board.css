@@ -4,6 +4,7 @@
     border-radius: 10px;
     height: 40px;
     border: none;
+    margin-top:10px;
     padding-left: 10px; 
     padding-right: 10px;
     color: #FFF;
@@ -30,6 +31,16 @@
     font-size: 22px;
     font-weight: bold;
     color: #AC6D6D;
+}
+
+.boardDescription {
+    padding-bottom:15px;
+    font-family: 'Montserrat'; 
+    font-size: 13px;
+    text-align: center;
+    align-items: center;
+    color: #6d3e3e;
+
 }
 
 
