@@ -52,6 +52,7 @@ const SettingsModal = ({tasksNo, setTasksNo, setSettingsOpen, settingsOpen}) => 
                 onClick={toggleModal}
                 style={{ float: "right" }}
                 color="white"
+                size="28"
             />
             <div className="modalTitle"> Settings </div>
             <div> 

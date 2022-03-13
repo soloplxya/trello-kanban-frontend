@@ -60,6 +60,7 @@ const AddBoardModal = (props) => {
                 onClick={toggleModal}
                 style={{ float: "right" }}
                 color="white"
+                size="28"
             />
             <div className="modalTitle"> New Board </div>
             <div> 

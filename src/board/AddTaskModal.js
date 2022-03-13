@@ -94,6 +94,7 @@ const AddTaskModal = ({setIsOpen, isOpen, setTodos, todos, setInProgress, inProg
                 onClick={toggleModal}
                 style={{ float: "right" }}
                 color="white"
+                size="28"
             />
             <div className="modalTitle"> New Task </div>
             <div> 
