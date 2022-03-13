@@ -13,7 +13,7 @@
     color: #B63434; 
     font-family: 'Montserrat'; 
     font-size: 22px;
-    padding: 15%;
+    padding: 18.5%;
     font-weight: bold;
 }
 
@@ -28,7 +28,7 @@
 
 .boardCardRemoveButtonDiv {
     position: relative;
-    top: 5%; 
+    top: 8%; 
     left: 40%;
 }
 
