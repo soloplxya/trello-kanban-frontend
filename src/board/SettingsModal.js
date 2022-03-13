@@ -8,7 +8,7 @@ import './AddTaskModal.css'
 
 const SettingsModal = ({tasksNo, setTasksNo, setSettingsOpen, settingsOpen}) => {
     const { id } = useParams();
-    const [userInput, setUserInput] = useState(0)
+    const [userInput, setUserInput] = useState(tasksNo)
     const customStyles = {
         content: {
           maxHeight: "400vh", 
@@ -31,6 +31,8 @@ const SettingsModal = ({tasksNo, setTasksNo, setSettingsOpen, settingsOpen}) => 
     function changeTasksMax() {
         // do some check for the user input here
        setTasksNo(userInput)
+       localStorage.setItem("tasksNo", userInput);
+       toggleModal()
     }
 
     function toggleModal() {
@@ -55,9 +57,9 @@ const SettingsModal = ({tasksNo, setTasksNo, setSettingsOpen, settingsOpen}) => 
             <div> 
               <div style={{display:"flex", flexDirection:"column", justifyContent:"space-between"}}> 
                 <input 
-                    type="text"
+                    type="number"
                     text-align="center"
-                    placeholder="Maximum tasks per column"
+                    placeholder="Max tasks per column"
                     style={{padding: "12px 20px", borderRadius: "25px", border: "none"}}
                     onChange={e => setUserInput(parseInt(e.target.value))}
                 />

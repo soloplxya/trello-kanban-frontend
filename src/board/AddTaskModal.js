@@ -31,7 +31,9 @@ const AddTaskModal = ({setIsOpen, isOpen, setTodos, todos, setInProgress, inProg
     // function that adds a board to the boards list
     function addTask() {
         const boards = JSON.parse(localStorage.getItem('boards'));
+        const tasksNo = localStorage.getItem('tasksNo');
         const board = boards[parseInt(id)];
+  
 
         const newTask = {
             id: new Date().valueOf(),
@@ -39,17 +41,28 @@ const AddTaskModal = ({setIsOpen, isOpen, setTodos, todos, setInProgress, inProg
         }
 
         if (list == "Todo") {
-            console.log("here")
+            if (todos.length == tasksNo) {
+                alert("Number of tasks has exceeded task limit! You can change this value in settings.");
+                return;
+            }
             todos.push(newTask);
             console.log(todos)
             setTodos(todos);
             board.columns.todo = todos;
         } else if (list == "InProgress") {
+            if (inProgress.length == tasksNo) {
+                alert("Number of tasks has exceeded task limit! You can change this value in settings.");
+                return;
+            }
             inProgress.push(newTask);
             setInProgress(inProgress);
             console.log(inProgress)
             board.columns.inProgress = inProgress;
         } else if (list == "Done") {
+            if (done.length == tasksNo) {
+                alert("Number of tasks has exceeded task limit! You can change this value in settings.");
+                return;
+            }
             done.push(newTask);
             setDone(done);
             console.log(done)

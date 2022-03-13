@@ -18,12 +18,20 @@ const Board = () => {
     const [board, setBoard] = useState({});
     const [title, setTitle] = useState("");
     const [isOpen, setIsOpen] = useState(false);
-    const [tasksNo, setTasksNo] = useState(5);
+    const [tasksNo, setTasksNo] = useState(10);
     const [settingsOpen, setSettingsOpen] = useState(false); 
     const location = useLocation(); 
     const renameArea = useRef('');
 
     function retrieveBoard() {
+        // initialize common maximum
+        if (localStorage.getItem('tasksNo')) {
+            setTasksNo(localStorage.getItem('tasksNo'));
+        } else {
+            setTasksNo(10);
+            localStorage.setItem('tasksNo', 10);
+        }
+
         const boards = JSON.parse(localStorage.getItem("boards"));
         const board = boards[parseInt(id)];
 
@@ -39,8 +47,8 @@ const Board = () => {
         setBoard(board);
     }
 
-
     const onDragEnd = (result) => {
+        const tasksNo = localStorage.getItem('tasksNo');
         const boards = JSON.parse(localStorage.getItem('boards'));
         const board = boards[parseInt(id)];
         if (!result.destination) {
@@ -61,19 +69,28 @@ const Board = () => {
         }
 
         if (sourceList === "Todo") {
-            console.log(todos)
+            if (todos.length == tasksNo) {
+                alert("Number of tasks has exceeded task limit! You can change this value in settings.");
+                return;
+            }
             var card = todos.find(card => parseInt(card.id) == parseInt(sourceItemIndex));
             const filteredTodos = todos.filter(card => parseInt(card.id) !== parseInt(sourceItemIndex));
             setTodos(filteredTodos);
             board.columns.todo = filteredTodos;
         } else if (sourceList === "In Progress" ) {
-            console.log(inProgress)
+            if (todos.length == tasksNo) {
+                alert("Number of tasks has exceeded task limit! You can change this value in settings.");
+                return;
+            }
             var card = inProgress.find(card => parseInt(card.id) == parseInt(sourceItemIndex));
             const filteredInProgress = inProgress.filter(card => parseInt(card.id) !== parseInt(sourceItemIndex));
             setInProgress(filteredInProgress);
             board.columns.inProgress = filteredInProgress;
         } else if (sourceList === "Done") {
-            console.log(done)
+            if (todos.length == tasksNo) {
+                alert("Number of tasks has exceeded task limit! You can change this value in settings.");
+                return;
+            }
             var card = done.find(card => parseInt(card.id) == parseInt(sourceItemIndex));
             const filteredDone = done.filter(card => parseInt(card.id) !== parseInt(sourceItemIndex));
             setDone(filteredDone); 
