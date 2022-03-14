@@ -35,7 +35,7 @@ const AddTaskModal = ({setIsOpen, isOpen, setTodos, todos, setInProgress, inProg
         const tasksNo = localStorage.getItem('tasksNo');
         const board = boards[parseInt(id)];
 
-        if (!description) {
+        if (description === "") {
             alert("Description field should not be empty!"); 
             return;
         }
@@ -74,6 +74,7 @@ const AddTaskModal = ({setIsOpen, isOpen, setTodos, todos, setInProgress, inProg
 
         localStorage.setItem('boards', JSON.stringify(boards));
         setList("Todo");
+        setDescription("");
         toggleModal();
     }
 
