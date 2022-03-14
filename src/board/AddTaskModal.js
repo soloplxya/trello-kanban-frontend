@@ -28,12 +28,17 @@ const AddTaskModal = ({setIsOpen, isOpen, setTodos, todos, setInProgress, inProg
         },
     };
 
+
     // function that adds a board to the boards list
     function addTask() {
         const boards = JSON.parse(localStorage.getItem('boards'));
         const tasksNo = localStorage.getItem('tasksNo');
         const board = boards[parseInt(id)];
-  
+
+        if (!description) {
+            alert("Description field should not be empty!"); 
+            return;
+        }
 
         const newTask = {
             id: new Date().valueOf(),
@@ -56,7 +61,6 @@ const AddTaskModal = ({setIsOpen, isOpen, setTodos, todos, setInProgress, inProg
             }
             inProgress.push(newTask);
             setInProgress(inProgress);
-            console.log(inProgress)
             board.columns.inProgress = inProgress;
         } else if (list == "Done") {
             if (done.length == tasksNo) {
@@ -65,11 +69,11 @@ const AddTaskModal = ({setIsOpen, isOpen, setTodos, todos, setInProgress, inProg
             }
             done.push(newTask);
             setDone(done);
-            console.log(done)
             board.columns.done = done; 
         }
 
         localStorage.setItem('boards', JSON.stringify(boards));
+        setList("Todo");
         toggleModal();
     }
 

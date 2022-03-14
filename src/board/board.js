@@ -133,8 +133,9 @@ const Board = () => {
             break;
         }
     }
-     // function to toggle the add task modal
-     function toggleModal() {
+
+    // function to toggle the add task modal
+    function toggleModal() {
         setIsOpen(true);
     }
 
