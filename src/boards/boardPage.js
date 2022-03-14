@@ -46,8 +46,8 @@ const Boards = () => {
     return ( 
         <Fragment>
             <div className="boardPage">
-                <div style={{alignItems: "center"}}>  
-                    <div className="boardTitle"> 
+                <div style={{alignContent: "center"}}>  
+                    <div className="boardPageTitle"> 
                         Boards
                     </div>
                     <button 
